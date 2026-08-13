@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head><link rel=stylesheet href=desktop-style.css>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>A-AI v1.1</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Oswald:wght@400;700&family=Poppins:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <!-- Marked.js library for rendering Markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body data-theme="purple" data-scheme="light" class="font-lexend">
+
+  <!-- Sparkles Canvas overlay for celebration feedback -->
+  <canvas id="sparkles-canvas"></canvas>
+
+  <!-- Slide-out Settings Sidebar/Drawer -->
+  <div id="settings-sidebar">
+    <div class="sidebar-header">
+      <h3>Controls & Settings</h3>
+      <button id="close-sidebar-btn" title="Close Drawer">✕</button>
+    </div>
+    
+    <div class="sidebar-section">
+      <h4>Backdrop Mode</h4>
+      <div style="display: flex; gap: 8px;">
+        <button id="scheme-toggle-btn" class="theme-pill" style="flex: 1; background: var(--user-msg-grad); border: none;">MODE: LIGHT</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>Theme Customizer</h4>
+      <div class="theme-options">
+        <button class="theme-pill" data-theme="purple" style="background:#a855f7;">Purple</button>
+        <button class="theme-pill" data-theme="green" style="background:#10b981;">Green</button>
+        <button class="theme-pill" data-theme="gold" style="background:#f59e0b;">Gold</button>
+        <button class="theme-pill" data-theme="cyberpunk" style="background:#ec4899;">Cyber</button>
+        <button class="theme-pill" data-theme="crimson" style="background:#ef4444;">Crimson</button>
+        <button class="theme-pill" data-theme="phantom" style="background: linear-gradient(135deg, #0a0a0d 0%, #d4af37 100%);">Phantom</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>Interactive Color Way</h4>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <div style="flex: 1; text-align: center;">
+          <span style="font-size: 0.72rem; color: var(--text-muted);">Start Color</span>
+          <input type="color" id="grad-start" value="#a855f7" style="width: 100%; height: 34px; border-radius: 6px; border: none; cursor: pointer; background: transparent;" />
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <span style="font-size: 0.72rem; color: var(--text-muted);">End Color</span>
+          <input type="color" id="grad-end" value="#6366f1" style="width: 100%; height: 34px; border-radius: 6px; border: none; cursor: pointer; background: transparent;" />
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>Glass Frost Opacity</h4>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <input type="range" id="glass-opacity" min="20" max="95" value="65" style="flex: 1; accent-color: var(--accent-color);" />
+        <span id="opacity-val" style="font-size: 0.85rem; font-weight: 700; width: 36px; text-align: right;">65%</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>Typography Font</h4>
+      <select id="font-family-select" class="sidebar-select">
+        <option value="font-lexend">Lexend (Default)</option>
+        <option value="font-oswald">Oswald (Bold Tech)</option>
+        <option value="font-poppins">Poppins (Friendly)</option>
+        <option value="font-mono">Share Tech Mono</option>
+      </select>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>Chat Font Size</h4>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <input type="range" id="text-size-slider" min="12" max="22" value="15" style="flex: 1; accent-color: var(--accent-color);" />
+        <span id="text-size-val" style="font-size: 0.85rem; font-weight: 700; width: 36px; text-align: right;">15px</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>Avatar Customization</h4>
+      <div style="display: flex; gap: 8px;">
+        <input type="text" id="avatar-input" class="sidebar-select" placeholder="Avatar Emoji / Image URL" />
+        <button id="save-avatar-btn" class="theme-pill" style="background: var(--logo-grad);">Set</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>AI Persona</h4>
+      <select id="persona-select" class="sidebar-select">
+        <option value="normal">Default</option>
+        <option value="commentator">Commentator</option>
+        <option value="clown">Class Clown</option>
+        <option value="teacher">Strict Teacher</option>
+        <option value="reporter">News Reporter</option>
+        <option value="casual">Casual</option>
+        <option value="formal">Formal</option>
+      </select>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>Language Mode</h4>
+      <select id="lang-select" class="sidebar-select">
+        <option value="auto">Auto Detect / Match User</option>
+        <option value="en">English (English)</option>
+        <option value="ar">العربية (Arabic)</option>
+        <option value="ja">日本語 (Japanese)</option>
+        <option value="zh">中文 (Chinese - Mandarin)</option>
+        <option value="ko">한국어 (Korean)</option>
+        <option value="es">Español (Spanish)</option>
+        <option value="fr">Français (French)</option>
+        <option value="de">Deutsch (German)</option>
+        <option value="it">Italiano (Italian)</option>
+        <option value="pt">Português (Portuguese)</option>
+        <option value="ru">Русский (Russian)</option>
+        <option value="hi">हिन्दी (Hindi)</option>
+        <option value="bn">বাংলা (Bengali)</option>
+        <option value="ur">اردو (Urdu)</option>
+        <option value="tr">Türkçe (Turkish)</option>
+        <option value="fa">فارسی (Persian)</option>
+        <option value="nl">Nederlands (Dutch)</option>
+        <option value="pl">Polski (Polish)</option>
+        <option value="uk">Українська (Ukrainian)</option>
+        <option value="vi">Tiếng Việt (Vietnamese)</option>
+        <option value="id">Bahasa Indonesia (Indonesian)</option>
+        <option value="th">ไทย (Thai)</option>
+        <option value="el">Ελληνικά (Greek)</option>
+        <option value="he">עברית (Hebrew)</option>
+        <option value="sv">Svenska (Swedish)</option>
+        <option value="fi">Suomi (Finnish)</option>
+        <option value="no">Norsk (Norwegian)</option>
+        <option value="da">Dansk (Danish)</option>
+        <option value="cs">Čeština (Czech)</option>
+        <option value="hu">Magyar (Hungarian)</option>
+        <option value="ro">Română (Romanian)</option>
+        <option value="ms">Bahasa Melayu (Malay)</option>
+        <option value="tl">Tagalog (Filipino)</option>
+        <option value="sw">Kiswahili (Swahili)</option>
+        <option value="franco">Franco / Arabizi</option>
+      </select>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>Voice Parameters</h4>
+      <div class="voice-slider-group-vertical">
+        <label>Speed: <span id="speed-val">1.0x</span></label>
+        <input type="range" id="speech-rate" min="0.5" max="2" step="0.1" value="1">
+      </div>
+      <div class="voice-slider-group-vertical" style="margin-top: 10px;">
+        <label>Pitch: <span id="pitch-val">1.0</span></label>
+        <input type="range" id="speech-pitch" min="0.5" max="1.5" step="0.1" value="1">
+      </div>
+    </div>
+
+    <div class="sidebar-section" style="margin-top: auto; border-top: var(--glass-border); padding-top: 15px; text-align: center;">
+      <p style="font-size: 0.75rem; color: var(--text-muted);">A-AI Version <span style="color: var(--text-main); font-weight: 700;">1.1</span></p>
+    </div>
+  </div>
+
+  <!-- Overlay background when sidebar is open -->
+  <div id="sidebar-overlay"></div>
+
+  <!-- Main Viewport Emulator Shell Container -->
+  <div id="emulator-shell" class="emulator-auto">
+    <div id="chat-container">
+      <!-- Header -->
+      <header id="chat-header">
+        <div class="header-left-group">
+          <button id="sidebar-toggle-btn" class="header-icon-btn" title="Open Settings Drawer">⚙</button>
+          <img src="logo.png" alt="A-AI Logo" class="chat-logo" />
+          <div class="header-text">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <h2 style="font-weight: 700; font-size: 1.15rem;">A-AI</h2>
+              <span class="version-badge">v1.1</span>
+            </div>
+            <p>Class 3rd Prep Official AI</p>
+          </div>
+        </div>
+        
+        <div class="header-actions">
+          <button id="view-mode-btn" class="header-icon-btn" style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px;" title="Aspect Ratio Emulator">SCREEN: AUTO</button>
+          <button id="games-toggle-btn" class="header-icon-btn" title="Mini-Games Hub">ARCADE</button>
+          <button id="quiz-toggle-btn" class="header-icon-btn" title="Prep 3 Quiz Arena">QUIZ</button>
+          <button id="sound-toggle-btn" class="header-icon-btn" title="Toggle Sound">SOUND</button>
+          <button id="search-toggle-btn" class="header-icon-btn" title="Search Chat">SEARCH</button>
+          <button id="export-btn" class="header-icon-btn" title="Export Chat">EXPORT</button>
+          <button id="clear-btn" class="header-icon-btn" title="Clear Chat">CLEAR</button>
+        </div>
+      </header>
+
+      <!-- Search Bar -->
+      <div id="search-bar" class="hidden">
+        <input type="text" id="search-input" placeholder="Search chat history..." />
+        <button id="close-search-btn">✕</button>
+      </div>
+
+      <!-- Quick Prompts Chips -->
+      <div id="quick-prompts">
+        <button class="chip" data-prompt="Who won the 2026 Season Prep Cup?">Prep Cup Champion</button>
+        <button class="chip" data-prompt="What are the dates for the 2A/P Dish Parties?">Dishparties Dates</button>
+        <button class="chip" data-prompt="Tell me about the ASports 2026/27 Shirt">New Official Shirt</button>
+        <button class="chip" data-prompt="How do I join the Minecraft server?">Minecraft Server</button>
+      </div>
+
+      <!-- Chat Output Area -->
+      <div id="chat-box"></div>
+
+      <!-- Status Indicator Bar -->
+      <div id="interactive-status-bar">
+        <span class="status-indicator"></span>
+        <span class="status-text">A-AI Ready</span>
+      </div>
+
+      <!-- Input Bar (Full Width Screen Stretched) -->
+      <div id="input-container">
+        <button id="mic-btn" class="input-icon-btn" title="Voice Input">🎙</button>
+        <input type="text" id="user-input" placeholder="Ask anything..." autocomplete="off" />
+        <button id="send-btn">SEND</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mini-Game Hub Modal -->
+  <div id="games-modal" class="custom-modal hidden">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3>Arcade & Mini-Games</h3>
+        <button id="close-games-btn" class="close-modal-btn">✕</button>
+      </div>
+      <div class="game-hub-grid">
+        <button class="game-card" data-game="mrmine">⛏ Mr. Mine</button>
+        <button class="game-card" data-game="clicker">⚡ Clicker Heroes</button>
+      </div>
+      <div id="game-iframe-container" class="hidden">
+        <iframe id="game-frame" src="" frameborder="0"></iframe>
+        <button id="back-to-hub-btn" class="action-btn" style="margin-top: 10px; width: 100%; justify-content: center;">← Back to Hub</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prep 3 Quiz Modal -->
+  <div id="quiz-modal" class="custom-modal hidden">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3>Egypt Prep 3 Quiz Arena</h3>
+        <button id="close-quiz-btn" class="close-modal-btn">✕</button>
+      </div>
+      <div id="quiz-body">
+        <div id="quiz-welcome">
+          <p>Test your knowledge for 3rd Prep (Cairo Curriculum)! Choose your difficulty level:</p>
+          <div class="theme-options" style="margin-top: 15px;">
+            <button class="theme-pill quiz-tier-btn" data-level="easy" style="background:#10b981; border: none;">Level 1: Easy</button>
+            <button class="theme-pill quiz-tier-btn" data-level="medium" style="background:#f59e0b; border: none;">Level 2: Medium</button>
+            <button class="theme-pill quiz-tier-btn" data-level="hard" style="background:#ef4444; border: none;">Level 3: Hard</button>
+          </div>
+        </div>
+        <div id="quiz-game-area" class="hidden">
+          <div id="quiz-progress" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;"></div>
+          <h4 id="quiz-question" style="margin-bottom: 15px; font-size: 1.05rem;"></h4>
+          <div id="quiz-options" style="display: flex; flex-direction: column; gap: 8px;"></div>
+        </div>
+        <div id="quiz-results" class="hidden" style="text-align: center;">
+          <h4 id="quiz-score-text" style="margin-bottom: 12px;"></h4>
+          <button id="restart-quiz-btn" class="action-btn" style="margin: 0 auto;">🔄 Play Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+<script src=cript.js></script></body>
+</html>

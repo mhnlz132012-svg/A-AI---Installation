@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A-AI Loading Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #a855f7;
+      --accent: #6366f1;
+      --bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    
+    body {
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .loader-card {
+      width: 420px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+      z-index: 10;
+    }
+    
+    .logo-container {
+      width: 110px;
+      height: 110px;
+      position: relative;
+      animation: spin-and-pause 3.5s infinite ease-in-out;
+    }
+    
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+    
+    @keyframes spin-and-pause {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(360deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .text-group {
+      text-align: center;
+    }
+    
+    .text-group h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .text-group p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(226, 232, 240, 0.8);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 10px;
+      animation: load-to-right 4s forwards cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    @keyframes load-to-right {
+      0% { width: 0%; }
+      30% { width: 45%; }
+      60% { width: 75%; }
+      100% { width: 100%; }
+    }
+    
+    .status-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: -12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loader-card">
+    <div class="logo-container">
+      <img src="logo.png" alt="A-AI logo" class="logo-img" onerror="this.src='https://www.2aclassweb.com/logo.png'; this.onerror=null;" />
+    </div>
+    
+    <div class="text-group">
+      <h1>A-AI Assistant</h1>
+      <p>v1.1 Official Desktop</p>
+    </div>
+    
+    <div class="progress-track">
+      <div class="progress-bar"></div>
+    </div>
+    
+    <div class="status-text" id="status-label">Initializing system files...</div>
+  </div>
+
+  <script>
+    const stages = [
+      { t: 0, txt: "Loading local data assets..." },
+      { t: 1200, txt: "Synchronizing class records database..." },
+      { t: 2500, txt: "Activating offline caching buffers..." },
+      { t: 3500, txt: "Rendering user dashboard layout..." }
+    ];
+    
+    const label = document.getElementById("status-label");
+    stages.forEach(stage => {
+      setTimeout(() => {
+        if(label) label.textContent = stage.txt;
+      }, stage.t);
+    });
+
+    document.addEventListener('contextmenu', event => event.preventDefault());
+  </script>
+</body>
+</html>

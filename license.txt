@@ -1,0 +1,37 @@
+===================================================
+              A-AI v1.1 - END-USER LICENSE
+===================================================
+
+Welcome to the official desktop deployment of A-AI (Version 1.1)
+designed specifically for the 2A Class Community!
+
+By installing this software client, you agree to the following 
+simple terms and agreements:
+
+1. INTENDED USE & AUDIENCE
+This application is created as a unified portal for classmates
+and supporters of the Class 2A Web platform. It provides instant 
+access to our central databases, esports tournament standings,
+the upcoming A.S.C (A Sports Currency) bank, and mini-games hub.
+
+2. LOCAL CACHING & PRIVACY
+A-AI runs a smart local database caching layer to allow full 
+offline query retrieval when an active network connection is lost.
+Your settings, selected AI personas, and local chat archives are
+saved securely on your personal local drive and are never tracked.
+
+3. SECURITY RULES
+Do not reverse-engineer, exploit, or inject malicious scripts into
+the Electron desktop wrapper. The app is protected by default
+sandboxing policies to safeguard your PC environment.
+
+4. DONATIONS POLICY
+Any voluntary donations made via the official portal (+20 104 0637 025)
+are processed strictly to fund the yearly domain name subscription of 
+the 2A central class website and are non-refundable.
+
+Thank you for being an active and supporting member of the 2A Community!
+
+© 2026 2A Class Web. All Rights Reserved.
+Website Version: 5.6.11 | App Target: Windows 2.0.0
+===================================================

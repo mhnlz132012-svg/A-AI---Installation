@@ -1,0 +1,50 @@
+/* --- A-AI v1.1 Desktop Exclusive Visual Style (desktop-style.css) --- */
+
+/* Modern red slide-down offline warning banner */
+#offline-banner {
+  background: rgba(239, 68, 68, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  padding: 10px 24px !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 999999 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s ease !important;
+  pointer-events: none !important; /* Clicks pass straight through so it never blocks elements underneath! */
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  letter-spacing: 0.02em !important;
+}
+
+#offline-banner.hidden {
+  display: none !important;
+  opacity: 0 !important;
+  transform: translateY(-100%) !important;
+}
+
+/* Premium Desktop Scrollbars */
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02) !important;
+  border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3) !important; /* Neon purple accents */
+  border-radius: 10px !important;
+  transition: background 0.2s ease !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.6) !important;
+}

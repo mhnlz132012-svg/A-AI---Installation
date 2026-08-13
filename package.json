@@ -1,0 +1,67 @@
+{
+  "name": "a-ai",
+  "version": "1.1.0",
+  "description": "Class 3rd Prep Official AI Desktop Client",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "pack": "electron-builder --dir"
+  },
+  "author": "mhnlz132012-svg",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^31.1.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.2aclassweb.a-ai",
+    "productName": "A-AI 1.1",
+    "directories": {
+      "output": "dist"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "mhnlz132012-svg",
+      "repo": "A-AI---Installation"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "logo.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "A-AI 1.1",
+      "license": "license.txt",
+      "uninstallDisplayName": "A-AI 1.1 Uninstaller"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "logo.png",
+      "category": "public.app-category.education"
+    },
+    "dmg": {
+      "title": "A-AI Assistant v1.1",
+      "icon": "logo.png",
+      "iconSize": 100,
+      "contents": [
+        {
+          "x": 380,
+          "y": 180,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 180,
+          "type": "file"
+        }
+      ]
+    }
+  }
+}
